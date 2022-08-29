@@ -24,7 +24,13 @@ spring:
         - name: LogFilter
         - name: TokenRelay
       routes:
-        - id: accountRoute
+        - id: accountRoute # ❓ Esta sección equivale al SecurityContext?
+            # Contiene toda la información del usuarie autenticade,
+            # información que se utilizará para los chequeos de seguridad.
+            # Tiene información suficiente para dar soporte de OAuth contra un app desktop o de consola
+            # En nuestro caso, una web con requests, tenemos que validar cada unx
+          filters: # ❓ Está bien añadir el siguiente filtro en esta sección?
+            - RemoveRequestHeader=Cookie # ❓ Para qué sirve?
           predicates:
             - Path=/account/**
           uri: http://localhost:8080/
