@@ -4,11 +4,11 @@ info:
     name: gateway-service
     version: 1.0.0
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: gateway
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: gateway
 
 server:
   port: 8080
