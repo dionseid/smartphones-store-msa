@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: CountFilter
+        - name: LogFilter
+        - name: TokenRelay
+      routes:
+        - id: accountRoute
+          predicates:
+            - Path=/account/**
+          uri: http://localhost:8080/
+        - id: backendRoute
+          predicates:
+            - Path=/backend/**
+          uri: http://localhost:8081/
+        - id: frontendRoute
+          predicates:
+            - Path=/frontend/**
+          uri: http://localhost:8082/
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka
+  security:
+    oauth2:
+      client:
+        provider:
+          google:
+            issuer-uri: https://accounts.google.com
+        registration:
+          google:
+            client-id: 289408327288-v6tu33ao50n4simk8qr21lspcadskdc7.apps.googleusercontent.com
+            client-secret: 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 # De esta manera se autentica este servidor
+              # con un cuenta de Google
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope: openid
