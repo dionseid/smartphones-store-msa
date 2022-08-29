@@ -8,8 +8,8 @@ global-message: Configuration server is alive!
 management:
   info:
     env:
-    enabled: true
+      enabled: true
   endpoints:
     web:
-    exposure:
-      include: health,info
+      exposure:
+        include: health,info
